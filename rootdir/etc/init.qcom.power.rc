@@ -34,6 +34,11 @@ on enable-low-power
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 50000
     write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 50000
 
+    # Configure the cpu-boost module
+    write /sys/module/cpu_boost/parameters/boost_ms 20
+    write /sys/module/cpu_boost/parameters/input_boost_freq 998400
+    write /sys/module/cpu_boost/parameters/input_boost_ms 500
+
     # bring all CPUs online
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
