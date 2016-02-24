@@ -25,13 +25,14 @@ on enable-low-power
     # enable thermal core_control now
     write /sys/module/msm_thermal/core_control/enabled 1
 
-    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "25000 1094400:50000"
+    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 20000
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 30000
+    write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 30000
     write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 998400
-    write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 0
+    write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
     write /sys/devices/system/cpu/cpufreq/interactive/target_loads 80
-    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 50000
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 50000
 
     # Configure the cpu-boost module
