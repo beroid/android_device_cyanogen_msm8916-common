@@ -11,20 +11,36 @@ on enable-low-power
     # disable thermal core_control to update interactive governor settings
     write /sys/module/msm_thermal/core_control/enabled 0
 
-    # enable governor
+    # Configure interactive governor
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
-    # enable thermal core_control now
-    write /sys/module/msm_thermal/core_control/enabled 1
-
-    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 20000
+    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "19000 1094400:39000"
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 30000
+    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 40000
     write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 30000
     write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 998400
     write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads 80
+    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "40 800000:85 998400:90 1094400:80"
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
-    write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 50000
+    write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 40000
+    write /sys/devices/system/cpu/cpufreq/interactive/use_migration_notif 1
+
+    # Configure impulse governor
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "impulse"
+    write /sys/devices/system/cpu/cpufreq/impulse/above_hispeed_delay "19000 1094400:39000"
+    write /sys/devices/system/cpu/cpufreq/impulse/align_windows 1
+    write /sys/devices/system/cpu/cpufreq/impulse/go_hispeed_load 90
+    write /sys/devices/system/cpu/cpufreq/impulse/hispeed_freq 998400
+    write /sys/devices/system/cpu/cpufreq/impulse/io_is_busy 1
+    write /sys/devices/system/cpu/cpufreq/impulse/max_freq_hysteresis 40000
+    write /sys/devices/system/cpu/cpufreq/impulse/min_sample_time 40000
+    write /sys/devices/system/cpu/cpufreq/impulse/powersave_bias 1
+    write /sys/devices/system/cpu/cpufreq/impulse/target_loads "40 800000:85 998400:90 1094400:80"
+    write /sys/devices/system/cpu/cpufreq/impulse/timer_rate 40000
+    write /sys/devices/system/cpu/cpufreq/impulse/timer_slack 30000
+    write /sys/devices/system/cpu/cpufreq/impulse/use_migration_notif 1
+
+    # enable thermal core_control now
+    write /sys/module/msm_thermal/core_control/enabled 1
 
     # Configure the cpu-boost module
     write /sys/module/cpu_boost/parameters/input_boost_freq 800000
