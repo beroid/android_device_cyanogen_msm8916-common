@@ -46,6 +46,11 @@ on enable-low-power
     write /sys/module/cpu_boost/parameters/input_boost_freq 800000
     write /sys/module/cpu_boost/parameters/input_boost_ms 500
 
+    # Configure state helper
+    write /sys/kernel/state_helper/max_cpus_cri 2
+    write /sys/kernel/state_helper/batt_level_cri 10
+    write /sys/kernel/state_helper/batt_level_eco 15
+    
     # bring all CPUs online
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
